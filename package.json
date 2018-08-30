@@ -1,0 +1,39 @@
+{
+  "name": "avada-kedavra-voice-app",
+  "version": "1.0.0",
+  "description": "A voice app for the Harry Potter movies' most dangerous spell",
+  "main": "index.js",
+  "dependencies": {
+    "dashbot": "^9.9.2",
+    "jovo-framework": "^1.4.6",
+    "lodash": "^4.17.10",
+    "universal-analytics": "^0.4.17"
+  },
+  "devDependencies": {
+    "del": "^3.0.0",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb-base": "^11.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-install": "^1.1.0",
+    "gulp-zip": "^4.0.0",
+    "merge-stream": "^1.0.1",
+    "node-aws-lambda": "^0.1.8",
+    "run-sequence": "^1.2.2"
+  },
+  "scripts": {
+    "lint": "eslint app/ models/ aws-config.js gulpfile.js index.js server.js",
+    "lint-fix": "eslint --fix app/ models/ aws-config.js gulpfile.js index.js server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omenocal/avada-kedavra-voice-app.git"
+  },
+  "author": "Octavio Menocal",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/omenocal/avada-kedavra-voice-app/issues"
+  },
+  "homepage": "https://github.com/omenocal/avada-kedavra-voice-app#readme"
+}

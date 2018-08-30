@@ -1,0 +1,26 @@
+{
+	"name": "LaunchIntent",
+	"auto": true,
+	"webhookUsed": true,
+	"responses": [
+		{
+			"parameters": [
+				{
+					"isList": false,
+					"name": "character",
+					"value": "$character",
+					"dataType": "@LIST_OF_CHARACTERS"
+				}
+			]
+		}
+	],
+	"contexts": [],
+	"priority": 500000,
+	"webhookForSlotFilling": false,
+	"fallbackIntent": true,
+	"events": [
+		{
+			"name": "GOOGLE_ASSISTANT_WELCOME"
+		}
+	]
+}
