@@ -70,7 +70,7 @@
         "priority": 500000,
         "webhookUsed": true,
         "webhookForSlotFilling": false,
-        "fallbackIntent": true,
+        "fallbackIntent": false,
         "events": [
           {
             "name": "GOOGLE_ASSISTANT_WELCOME"
@@ -345,7 +345,7 @@
 				"priority": 500000,
 				"webhookUsed": true,
 				"webhookForSlotFilling": false,
-				"fallbackIntent": true,
+				"fallbackIntent": false,
 				"events": [
 					{
 						"name": "actions_intent_CANCEL"

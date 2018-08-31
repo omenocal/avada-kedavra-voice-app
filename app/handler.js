@@ -104,7 +104,7 @@ const handler = {
     }
 
     speechBuilder = speechBuilder
-      .addAudio(soundsArray[spellIndex])
+      .addAudio(soundsArray[spellIndex], '')
       .addBreak('0.5s');
 
     if (this.isAlexaSkill()) {
@@ -193,10 +193,12 @@ const handler = {
 };
 
 function getSounds(isGoogleAction) {
-  let sounds = _.concat(alexaSounds);
+  let sounds = [];
 
   if (isGoogleAction) {
     sounds = _.concat(sounds, googleSounds);
+  } else {
+    sounds = _.concat(sounds, alexaSounds);
   }
 
   return sounds;
