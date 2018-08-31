@@ -58,12 +58,30 @@
 		]
 	},
 	"intents": [
+    {
+      "name": "WelcomeIntent",
+      "phrases": [
+        "un hecho",
+        "hecho"
+      ],
+      "dialogflow": {
+        "auto": true,
+        "contexts": [],
+        "priority": 500000,
+        "webhookUsed": true,
+        "webhookForSlotFilling": false,
+        "fallbackIntent": true,
+        "events": [
+          {
+            "name": "GOOGLE_ASSISTANT_WELCOME"
+          }
+        ]
+      }
+    },
 		{
 			"name": "LaunchIntent",
 			"phrases": [
-				"un hecho",
-				"hecho",
-        "encantamiento",
+				"encantamiento",
         "un encantamiento",
         "quiero un encantamiento",
         "consigue un encantamiento",
@@ -100,20 +118,7 @@
             "dialogflow": "LIST_OF_CHARACTERS"
           }
         }
-      ],
-			"dialogflow": {
-				"auto": true,
-				"contexts": [],
-				"priority": 500000,
-				"webhookUsed": true,
-				"webhookForSlotFilling": false,
-				"fallbackIntent": true,
-				"events": [
-					{
-						"name": "GOOGLE_ASSISTANT_WELCOME"
-					}
-				]
-			}
+      ]
 		},
 		{
 			"name": "StartOverIntent",

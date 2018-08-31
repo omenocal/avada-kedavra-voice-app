@@ -1,0 +1,14 @@
+{
+	"name": "WelcomeIntent",
+	"auto": true,
+	"webhookUsed": true,
+	"contexts": [],
+	"priority": 500000,
+	"webhookForSlotFilling": false,
+	"fallbackIntent": true,
+	"events": [
+		{
+			"name": "GOOGLE_ASSISTANT_WELCOME"
+		}
+	]
+}

@@ -149,10 +149,15 @@
 			],
 			"intents": [
 				{
-					"name": "LaunchIntent",
+					"name": "WelcomeIntent",
 					"samples": [
 						"un hecho",
-						"hecho",
+						"hecho"
+					]
+				},
+				{
+					"name": "LaunchIntent",
+					"samples": [
 						"encantamiento",
 						"un encantamiento",
 						"quiero un encantamiento",

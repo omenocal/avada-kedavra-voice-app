@@ -73,12 +73,30 @@
   },
   "intents": [
     {
-      "name": "LaunchIntent",
+      "name": "WelcomeIntent",
       "phrases": [
         "a fact",
         "fact",
         "give me a fact",
-        "tell me a fact",
+        "tell me a fact"
+      ],
+      "dialogflow": {
+        "auto": false,
+        "contexts": [],
+        "priority": 500000,
+        "webhookUsed": true,
+        "webhookForSlotFilling": false,
+        "fallbackIntent": false,
+        "events": [
+          {
+            "name": "GOOGLE_ASSISTANT_WELCOME"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LaunchIntent",
+      "phrases": [
         "charm",
         "a charm",
         "i want a charm",
@@ -114,20 +132,7 @@
             "dialogflow": "LIST_OF_CHARACTERS"
           }
         }
-      ],
-      "dialogflow": {
-        "auto": false,
-        "contexts": [],
-        "priority": 500000,
-        "webhookUsed": true,
-        "webhookForSlotFilling": false,
-        "fallbackIntent": false,
-        "events": [
-          {
-            "name": "GOOGLE_ASSISTANT_WELCOME"
-          }
-        ]
-      }
+      ]
     },
     {
       "name": "StartOverIntent",

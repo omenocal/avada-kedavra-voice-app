@@ -1,0 +1,22 @@
+[
+	{
+		"data": [
+			{
+				"text": "un hecho",
+				"userDefined": false
+			}
+		],
+		"isTemplate": false,
+		"count": 0
+	},
+	{
+		"data": [
+			{
+				"text": "hecho",
+				"userDefined": false
+			}
+		],
+		"isTemplate": false,
+		"count": 0
+	}
+]

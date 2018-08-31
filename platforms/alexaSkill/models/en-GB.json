@@ -149,12 +149,17 @@
 			],
 			"intents": [
 				{
-					"name": "LaunchIntent",
+					"name": "WelcomeIntent",
 					"samples": [
 						"a fact",
 						"fact",
 						"give me a fact",
-						"tell me a fact",
+						"tell me a fact"
+					]
+				},
+				{
+					"name": "LaunchIntent",
+					"samples": [
 						"charm",
 						"a charm",
 						"i want a charm",
