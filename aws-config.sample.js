@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   // accessKeyId:      '',  // optional for loading AWS credentials from custom profile
   // secretAccessKey:  '',  // optional for loading AWS credentials from custom profile

@@ -2,6 +2,7 @@
 
 module.exports = {
   LaunchIntent: 'spellRequest',
+  WelcomeIntent: 'spellRequest',
   YesIntent: 'spellRequest',
   NoIntent: 'StopIntent',
   CancelIntent: 'StopIntent',

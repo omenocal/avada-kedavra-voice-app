@@ -4,13 +4,21 @@ module.exports = {
   en: {
     translation: {
       Spell: {
-        Launch: 'Here you go',
+        LaunchFirstTime: 'Hello {{name}}! Since this is your first time playing with Avada Kedavra, ' +
+          'let me tell you what we can do. We are not going to kill anyone with a spell, but I can ' +
+          'ensure you we\'re going to have fun with the sounds made by our spells. So, let\'s get started.',
+        Launch: 'Welcome back {{name}}. Here you go.',
         Next: 'Ok',
         Previous: 'Ok, here\'s the previous spell',
         StartOver: 'Ok',
         Unhandled: 'I\'m sorry, I didn\'t understand what you said, was it maybe a new spell I don\'t know? ' +
           'I bet you don\'t know this one either',
-        reprompt: 'Would you like to keep practicing?',
+        reprompt: [
+          'Shall we continue?',
+          'Should we continue?',
+          'Would you like to keep going?',
+          'Would you like to keep practicing?',
+        ],
 
         CardTitle: 'Spell Practice',
       },

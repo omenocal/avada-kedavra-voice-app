@@ -13,17 +13,32 @@ const storage = new UserStorage();
 const BASE_URL = 'https://s3.amazonaws.com/avadakedavra';
 
 const handler = {
-  LAUNCH() {
+  async LAUNCH() {
     registerGoogleAnalytics.call(this).event('Main flow', 'Session Start', { sc: 'start' });
     registerGoogleAnalytics.call(this).event('Main flow', 'Launch');
 
-    this.user().data.afterEffectIndex = this.user().data.afterEffectIndex || 0;
-    this.user().data.interjectionIndex = this.user().data.interjectionIndex || 0;
-    this.user().data.spellIndex = this.user().data.spellIndex || 0;
+    let name;
+    let user = await storage.get(this.getUserId());
+    const firstTimeLabel = user ? '' : 'FirstTime';
+
+    user = user || { userId: this.getUserId() };
+
+    if (this.isAlexaSkill()) {
+      try {
+        name = await this.user().getGivenName();
+      } catch (err) {
+        this.alexaSkill().showAskForContactPermissionCard('given_name')
+      }
+    }
+
+    user.afterEffectIndex = user.afterEffectIndex || 0;
+    user.interjectionIndex = user.interjectionIndex || 0;
+    user.spellIndex = user.spellIndex || 0;
 
     this
+      .setSessionAttribute('user', user)
       .setSessionAttribute('startTime', +new Date())
-      .toIntent('spellRequest', this.t('Spell.Launch'));
+      .toIntent('spellRequest', this.t(`Spell.Launch${firstTimeLabel}`, { name }));
   },
   CAN_FULFILL_INTENT() {
     console.log(this.getHandlerPath());
@@ -38,9 +53,12 @@ const handler = {
   PreviousIntent() {
     registerGoogleAnalytics.call(this).event('Main flow', 'PreviousIntent');
 
-    const spellIndex = this.user().data.spellIndex || 1;
-    this.user().data.spellIndex = spellIndex - 1;
-    this.toIntent('spellRequest', this.t('Spell.Previous'));
+    let spellIndex = this.getSessionAttribute('user.spellIndex') || 1;
+    spellIndex = spellIndex - 1;
+
+    this
+      .setSessionAttribute('user.spellIndex', spellIndex)
+      .toIntent('spellRequest', this.t('Spell.Previous'));
   },
   RepeatIntent() {
     if (this.getSessionAttribute('speechOutput')) {
@@ -73,13 +91,15 @@ const handler = {
     const interjectionsArray = this.t('Interjections');
     const afterEffectsArray = this.t('AfterEffects');
     const soundsArray = getSounds(this.isGoogleAction());
+    const user = this.getSessionAttribute('user')
 
-    let { afterEffectIndex, interjectionIndex, spellIndex } = this.user().data;
+    let { afterEffectIndex, interjectionIndex, spellIndex } = user;
     let speechBuilder = this.speechBuilder();
 
     if (previousSpeechOutput) {
       speechBuilder = speechBuilder
         .addText(previousSpeechOutput)
+        .addText('.')
         .addBreak('0.5s');
     }
 
@@ -90,23 +110,36 @@ const handler = {
     if (this.isAlexaSkill()) {
       speechBuilder = speechBuilder
         .addText(interjectionsArray[interjectionIndex])
-        .addBreak('0.5s');
+        .addBreak('0.5s')
+        .addText('.');
+
+      const bodyTemplate = this.alexaSkill().templateBuilder('BodyTemplate1');
+      bodyTemplate
+        .setToken('token')
+        .setBackButton('HIDDEN')
+        .setTitle(this.t('Spell.CardTitle'))
+        .setBackgroundImage({
+          description: this.t('Spell.CardTitle'),
+          url: `${BASE_URL}/1024x600.jpg`,
+        });
 
       this
         .alexaSkill()
-        .showStandardCard(this.t('Spell.CardTitle'), '', {
+        .showStandardCard(this.t('Spell.CardTitle'), '\u200C', {
           smallImageUrl: `${BASE_URL}/720x480.jpg`,
           largeImageUrl: `${BASE_URL}/1200x800.jpg`,
-        });
+        })
+        .showDisplayTemplate(bodyTemplate);
     } else {
       this
         .googleAction()
-        .showImageCard(this.t('Spell.CardTitle'), '****', `${BASE_URL}/720x480.jpg`)
+        .showImageCard(this.t('Spell.CardTitle'), '\u200C', `${BASE_URL}/720x480.jpg`)
         .showSuggestionChips(this.t('SuggestionChips'));
     }
 
     speechBuilder = speechBuilder
       .addText(afterEffectsArray[afterEffectIndex])
+      .addText('.')
       .addBreak('0.5s');
 
     afterEffectIndex += 1;
@@ -125,27 +158,28 @@ const handler = {
       spellIndex = -1;
     }
 
-    this.user().data.afterEffectIndex = afterEffectIndex + 1;
-    this.user().data.interjectionIndex = interjectionIndex + 1;
-    this.user().data.spellIndex = spellIndex + 1;
+    user.afterEffectIndex = afterEffectIndex + 1;
+    user.interjectionIndex = interjectionIndex + 1;
+    user.spellIndex = spellIndex + 1;
 
     speechBuilder = speechBuilder.addT('Spell.reprompt');
 
     this
+      .setSessionAttribute('user', user)
       .setSessionAttribute('speechOutput', speechBuilder.build())
       .setSessionAttribute('repromptSpeech', this.t('Spell.reprompt'))
       .ask(this.getSessionAttribute('speechOutput'), this.getSessionAttribute('repromptSpeech'));
   },
-  StopIntent() {
-    // await storage.put(this.getSessionAttribute('user'));
+  async StopIntent() {
+    await storage.put(this.getSessionAttribute('user'));
 
     registerGoogleAnalytics.call(this).event('Main flow', 'StopIntent');
     endSession.call(this);
 
     this.tell(this.t('Exit'));
   },
-  END() {
-    // await storage.put(this.getSessionAttribute('user'));
+  async END() {
+    await storage.put(this.getSessionAttribute('user'));
 
     registerGoogleAnalytics.call(this).event('Main flow', 'SessionEnded');
     endSession.call(this);

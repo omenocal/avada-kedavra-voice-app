@@ -10,7 +10,7 @@
   },
   "db": {
     "type": "dynamodb",
-    "tableName": "AvadaKedabra",
+    "tableName": "AvadaKedavra",
     "awsConfig": {
       "region": "us-region-1"
     }

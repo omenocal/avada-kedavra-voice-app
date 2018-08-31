@@ -2,6 +2,7 @@ db/
 dist
 dist.zip
 /.ask
+platforms/alexaSkill/.ask/config
 aws-config.js
 swagger.yaml
 key-file.json

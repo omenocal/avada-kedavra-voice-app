@@ -31,7 +31,7 @@ const jovoConfig = {
       },
     },
   },
-  db: config.db,
+  // db: config.db,
 };
 
 const app = new App(jovoConfig);

@@ -1,16 +1,25 @@
 'use strict';
 
 module.exports = {
-  en: {
+  es: {
     translation: {
       Spell: {
-        Launch: 'Aquí vamos',
+        LaunchFirstTime: 'Hola {{name}}! Ya que esta es la primera vez que juegas con Avada Kedavra, ' +
+          'permíteme explicarte lo que podemos hacer. Primero que todo, no vamos a matar a nadie con un ' +
+          'hechizo, pero te puedo asegurar que nos divertiremos con los sonidos hechos con nuestros ' +
+          'encantamientos. Así que empecemos de una vez.',
+        Launch: 'Hola de nuevo {{name}}. Aquí vamos.',
         Next: 'Okey',
         Previous: 'Okey, este es el hechizo anterior',
         StartOver: 'Okey',
         Unhandled: 'Lo siento, no entendí lo que dijiste, tal vez fue un hechizo nuevo que no conozco? ' +
           'Apuesto que no conoces este tampoco',
-        reprompt: '¿Te gustaría seguir practicando?',
+        reprompt: [
+          '¿Continuamos?',
+          '¿Seguimos?',
+          '¿Te gustaría seguir?',
+          '¿Te gustaría seguir practicando?',
+        ],
 
         CardTitle: 'Práctica de Hechizo',
       },
@@ -22,7 +31,7 @@ module.exports = {
         reprompt: '¿Quieres practicar algunos hechizos?',
       },
 
-      Exit: 'Adiós, gracias por practicar. Hasta la próxima!',
+      Exit: 'Adiós, y gracias por practicar. Hasta la próxima!',
 
       SuggestionChips: [
         'si',
