@@ -27,7 +27,7 @@ const handler = {
       try {
         name = await this.user().getGivenName();
       } catch (err) {
-        this.alexaSkill().showAskForContactPermissionCard('given_name')
+        this.alexaSkill().showAskForContactPermissionCard('given_name');
       }
     }
 
@@ -54,7 +54,7 @@ const handler = {
     registerGoogleAnalytics.call(this).event('Main flow', 'PreviousIntent');
 
     let spellIndex = this.getSessionAttribute('user.spellIndex') || 1;
-    spellIndex = spellIndex - 1;
+    spellIndex -= 1;
 
     this
       .setSessionAttribute('user.spellIndex', spellIndex)
@@ -91,10 +91,30 @@ const handler = {
     const interjectionsArray = this.t('Interjections');
     const afterEffectsArray = this.t('AfterEffects');
     const soundsArray = getSounds(this.isGoogleAction());
-    const user = this.getSessionAttribute('user')
+    const user = this.getSessionAttribute('user');
 
-    let { afterEffectIndex, interjectionIndex, spellIndex } = user;
+    let {
+      afterEffectIndex,
+      afterEffectIdArray,
+      interjectionIndex,
+      spellIndex,
+      soundIdArray,
+    } = user;
+
     let speechBuilder = this.speechBuilder();
+    const afterEffectsSize = _.size(afterEffectsArray);
+    const soundSize = _.size(soundsArray);
+
+    if (_.size(afterEffectIdArray) !== afterEffectsSize) {
+      afterEffectIdArray = _.shuffle(_.range(afterEffectsSize));
+    }
+
+    if (_.size(soundIdArray) !== soundSize) {
+      soundIdArray = _.shuffle(_.range(soundSize));
+    }
+
+    user.afterEffectIdArray = afterEffectIdArray;
+    user.soundIdArray = soundIdArray;
 
     if (previousSpeechOutput) {
       speechBuilder = speechBuilder
@@ -104,7 +124,7 @@ const handler = {
     }
 
     speechBuilder = speechBuilder
-      .addAudio(soundsArray[spellIndex], '')
+      .addAudio(soundsArray[soundIdArray[spellIndex]], '')
       .addBreak('0.5s');
 
     if (this.isAlexaSkill()) {
@@ -137,8 +157,10 @@ const handler = {
         .showSuggestionChips(this.t('SuggestionChips'));
     }
 
+    const moderated = `<emphasis level="moderate">${afterEffectsArray[afterEffectIdArray[afterEffectIndex]]}</emphasis>`;
+
     speechBuilder = speechBuilder
-      .addText(afterEffectsArray[afterEffectIndex])
+      .addText(moderated)
       .addText('.')
       .addBreak('0.5s');
 
@@ -147,20 +169,20 @@ const handler = {
     spellIndex += 1;
 
     if (afterEffectIndex >= _.size(afterEffectsArray)) {
-      afterEffectIndex = -1;
+      afterEffectIndex = 0;
     }
 
     if (interjectionIndex >= _.size(interjectionsArray)) {
-      interjectionIndex = -1;
+      interjectionIndex = 0;
     }
 
     if (spellIndex >= _.size(soundsArray)) {
-      spellIndex = -1;
+      spellIndex = 0;
     }
 
-    user.afterEffectIndex = afterEffectIndex + 1;
-    user.interjectionIndex = interjectionIndex + 1;
-    user.spellIndex = spellIndex + 1;
+    user.afterEffectIndex = afterEffectIndex;
+    user.interjectionIndex = interjectionIndex;
+    user.spellIndex = spellIndex;
 
     speechBuilder = speechBuilder.addT('Spell.reprompt');
 

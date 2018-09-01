@@ -17,6 +17,12 @@ module.exports = {
         reprompt: [
           '¿Continuamos?',
           '¿Seguimos?',
+          '¿Mas encantamientos?',
+          '¿Mas hechizos?',
+          '¿Otro encantamiento?',
+          '¿Otro hechizo?',
+          '¿Quieres otro encantamiento?',
+          '¿Quieres otro hechizo?',
           '¿Te gustaría seguir?',
           '¿Te gustaría seguir practicando?',
         ],
@@ -118,6 +124,7 @@ module.exports = {
       ],
 
       AfterEffects: [
+        '¿Escuchaste eso?',
         '¿Puedes ver si quebre algo?',
         'Apuesto a que duele',
         'Apuesto a que te dolió',
@@ -144,6 +151,8 @@ module.exports = {
         'Eso fue sorprendente',
         'Eso fue maravilloso',
         'Eso me quitó el aliento',
+        'Ten cuidado, alguien pudo haber entrado',
+        'Hay un nuevo visitante',
       ],
     },
   },
