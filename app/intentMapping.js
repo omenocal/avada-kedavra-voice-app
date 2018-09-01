@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = {
-  LaunchIntent: 'spellRequest',
-  WelcomeIntent: 'spellRequest',
+  LaunchIntent: 'LAUNCH',
+  WelcomeIntent: 'LAUNCH',
   YesIntent: 'spellRequest',
   NoIntent: 'StopIntent',
   CancelIntent: 'StopIntent',
