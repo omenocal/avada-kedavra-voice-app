@@ -17,19 +17,10 @@ const handler = {
     registerGoogleAnalytics.call(this).event('Main flow', 'Session Start', { sc: 'start' });
     registerGoogleAnalytics.call(this).event('Main flow', 'Launch');
 
-    let name;
     let user = await storage.get(this.getUserId());
     const firstTimeLabel = user ? '' : 'FirstTime';
 
     user = user || { userId: this.getUserId() };
-
-    if (this.isAlexaSkill()) {
-      try {
-        name = await this.user().getGivenName();
-      } catch (err) {
-        this.alexaSkill().showAskForContactPermissionCard('given_name');
-      }
-    }
 
     user.afterEffectIndex = user.afterEffectIndex || 0;
     user.interjectionIndex = user.interjectionIndex || 0;
@@ -38,7 +29,7 @@ const handler = {
     this
       .setSessionAttribute('user', user)
       .setSessionAttribute('startTime', +new Date())
-      .toIntent('spellRequest', this.t(`Spell.Launch${firstTimeLabel}`, { name }));
+      .toIntent('spellRequest', this.t(`Spell.Launch${firstTimeLabel}`));
   },
   CAN_FULFILL_INTENT() {
     console.log(this.getHandlerPath());

@@ -4,11 +4,11 @@ module.exports = {
   es: {
     translation: {
       Spell: {
-        LaunchFirstTime: 'Hola {{name}}! Ya que esta es la primera vez que juegas con Avada Kedavra, ' +
+        LaunchFirstTime: 'Hola! Ya que esta es la primera vez que juegas con Avada Kedavra, ' +
           'permíteme explicarte lo que podemos hacer. Primero que todo, no vamos a matar a nadie con un ' +
           'hechizo, pero te puedo asegurar que nos divertiremos con los sonidos hechos con nuestros ' +
           'encantamientos. Así que empecemos de una vez.',
-        Launch: 'Hola de nuevo {{name}}. Aquí vamos.',
+        Launch: 'Hola de nuevo. Aquí vamos.',
         Next: 'Okey',
         Previous: 'Okey, este es el hechizo anterior',
         StartOver: 'Okey',

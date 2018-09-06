@@ -4,10 +4,10 @@ module.exports = {
   en: {
     translation: {
       Spell: {
-        LaunchFirstTime: 'Hello {{name}}! Since this is your first time playing with Avada Kedavra, ' +
+        LaunchFirstTime: 'Hello! Since this is your first time playing with Avada Kedavra, ' +
           'let me tell you what we can do. We are not going to kill anyone with a spell, but I can ' +
           'ensure you we\'re going to have fun with the sounds made by our spells. So, let\'s get started.',
-        Launch: 'Welcome back {{name}}. Here you go.',
+        Launch: 'Welcome back. Here you go.',
         Next: 'Ok',
         Previous: 'Ok, here\'s the previous spell',
         StartOver: 'Ok',
