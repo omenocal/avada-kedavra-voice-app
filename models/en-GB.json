@@ -306,6 +306,7 @@
         "name": "AMAZON.YesIntent"
       },
       "phrases": [
+        "yes",
         "yes please",
         "yup",
         "yep",
@@ -349,6 +350,7 @@
         "name": "AMAZON.NoIntent"
       },
       "phrases": [
+        "no",
         "no thank you",
         "no thanks",
         "nope",
