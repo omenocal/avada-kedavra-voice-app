@@ -34,6 +34,12 @@ const handler = {
   CAN_FULFILL_INTENT() {
     console.log(this.getHandlerPath());
 
+    const character = (this.getInput('character') || {}).key;
+
+    if (_.includes(['LaunchIntent', 'LAUNCH'], this.getIntentName()) && character) {
+      this.canFulfillSlot('character', 'YES', 'YES');
+    }
+
     this.canFulfillRequest();
   },
   NextIntent() {
