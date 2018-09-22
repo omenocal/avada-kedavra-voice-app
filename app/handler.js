@@ -80,6 +80,15 @@ const handler = {
       .ask(this.getSessionAttribute('speechOutput'), this.getSessionAttribute('repromptSpeech'));
   },
   Unhandled() {
+    if (this.isGoogleAction()) {
+      const rawText = this.googleAction().getRawText();
+
+      if (_.includes(['yes', 'yeah', 'sure', 'of course'], rawText)) {
+        this.toIntent('spellRequest');
+        return;
+      }
+    }
+
     this.toIntent('spellRequest', this.t('Spell.Unhandled'));
   },
   spellRequest(previousSpeechOutput) {
